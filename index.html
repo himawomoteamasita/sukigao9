@@ -1,0 +1,1335 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0,
+maximum-scale=1.0, user-scalable=no">
+
+<title>RINDO 好き顔9</title>
+
+<style>
+* {
+box-sizing: border-box;
+-webkit-tap-highlight-color: transparent;
+}
+
+html {
+background: #fbf4f8;
+}
+
+body {
+margin: 0;
+background:
+linear-gradient(
+180deg,
+#fff9fc 0%,
+#fdf4f9 100%
+);
+color: #29252b;
+font-family:
+-apple-system,
+BlinkMacSystemFont,
+"Hiragino Kaku Gothic ProN",
+"Yu Gothic",
+"Noto Sans JP",
+sans-serif;
+}
+
+button {
+font: inherit;
+}
+
+#app {
+min-height: 100vh;
+}
+
+.page {
+width: 100%;
+max-width: 760px;
+margin: 0 auto;
+padding: 18px 18px 110px;
+}
+
+/* -------------------------
+HEADER
+------------------------- */
+
+.topbar {
+display: flex;
+align-items: center;
+justify-content: space-between;
+margin-bottom: 16px;
+}
+
+.phase {
+display: inline-flex;
+align-items: center;
+gap: 7px;
+padding: 8px 15px;
+border-radius: 999px;
+background: #f9e3ef;
+color: #7d536d;
+font-weight: 800;
+}
+
+.phase::before {
+content: "🌱";
+}
+
+.progress-number {
+font-size: 18px;
+font-weight: 800;
+color: #6c5263;
+}
+
+.home-btn {
+border: 0;
+background: transparent;
+color: #806176;
+font-size: 16px;
+cursor: pointer;
+}
+
+.progress {
+height: 10px;
+border-radius: 999px;
+background: #efdce8;
+overflow: hidden;
+}
+
+.progress-bar {
+height: 100%;
+width: 0%;
+border-radius: 999px;
+background: linear-gradient(90deg,#b34d89,#c2679e);
+transition: width .3s ease;
+}
+
+/* -------------------------
+QUESTION
+------------------------- */
+
+.question-area {
+text-align: center;
+padding: 26px 0 20px;
+}
+
+.question-area h1 {
+margin: 0;
+font-size: clamp(23px, 6vw, 34px);
+letter-spacing: -.04em;
+}
+
+.question-area p {
+margin: 9px 0 0;
+color: #907b88;
+font-size: 16px;
+}
+
+.cards {
+display: grid;
+grid-template-columns: repeat(2, minmax(0, 1fr));
+gap: 16px;
+}
+
+/* -------------------------
+MEMBER CARD
+------------------------- */
+
+.member-card {
+position: relative;
+background: white;
+border-radius: 23px;
+overflow: hidden;
+border: 2px solid transparent;
+box-shadow:
+0 8px 25px rgba(121,73,105,.08);
+cursor: pointer;
+transition:
+transform .15s ease,
+border .15s ease,
+box-shadow .15s ease;
+}
+
+.member-card:active {
+transform: scale(.985);
+}
+
+.member-card.selected {
+border-color: #b74e8e;
+box-shadow:
+0 0 0 4px rgba(183,78,142,.14),
+0 12px 30px rgba(121,73,105,.14);
+}
+
+.member-card img {
+display: block;
+width: 100%;
+aspect-ratio: 1 / 1;
+object-fit: cover;
+background: #eee;
+}
+
+.member-info {
+padding: 12px 14px 15px;
+}
+
+.member-name {
+font-size: 18px;
+font-weight: 900;
+}
+
+.member-group {
+margin-top: 4px;
+color: #8c7a86;
+font-size: 13px;
+}
+
+.heart {
+position: absolute;
+top: 12px;
+right: 12px;
+
+width: 45px;
+height: 45px;
+
+display: grid;
+place-items: center;
+
+border-radius: 50%;
+background: rgba(255,255,255,.92);
+
+font-size: 23px;
+color: #d0bac8;
+
+box-shadow: 0 3px 12px rgba(0,0,0,.08);
+}
+
+.selected .heart {
+color: #c24d91;
+background: #fff;
+}
+
+/* -------------------------
+BOTTOM BAR
+------------------------- */
+
+.bottom-bar {
+position: fixed;
+z-index: 20;
+left: 0;
+right: 0;
+bottom: 0;
+
+background: rgba(255,255,255,.96);
+backdrop-filter: blur(14px);
+
+border-top: 1px solid #eadfe5;
+
+padding:
+13px
+max(16px, env(safe-area-inset-right))
+calc(13px + env(safe-area-inset-bottom))
+max(16px, env(safe-area-inset-left));
+}
+
+.bottom-inner {
+max-width: 760px;
+margin: auto;
+
+display: grid;
+grid-template-columns: 1fr auto 1fr;
+align-items: center;
+gap: 12px;
+}
+
+.back-btn,
+.next-btn {
+min-height: 55px;
+border-radius: 18px;
+border: 1px solid #eee3e9;
+background: white;
+font-weight: 800;
+cursor: pointer;
+}
+
+.back-btn {
+color: #c9bdc5;
+}
+
+.next-btn {
+border: 0;
+color: white;
+background:
+linear-gradient(135deg,#b64f8e,#a83f7d);
+box-shadow: 0 7px 18px rgba(166,62,124,.23);
+}
+
+.next-btn:disabled {
+opacity: .45;
+}
+
+.selected-count {
+font-weight: 900;
+color: #6e5666;
+white-space: nowrap;
+}
+
+/* -------------------------
+PRELIMINARY RESULT
+------------------------- */
+
+.center-page {
+text-align: center;
+padding-top: 55px;
+}
+
+.party {
+font-size: 42px;
+}
+
+.english {
+margin-top: 16px;
+color: #9b718a;
+font-weight: 900;
+letter-spacing: .18em;
+font-size: 13px;
+}
+
+.result-title {
+margin: 10px 0 22px;
+font-size: 42px;
+font-weight: 1000;
+letter-spacing: -.06em;
+}
+
+.result-description {
+color: #756773;
+font-size: 18px;
+line-height: 1.8;
+}
+
+.candidate-count {
+font-size: 24px;
+font-weight: 900;
+color: #332a31;
+}
+
+.tags {
+display: flex;
+flex-wrap: wrap;
+justify-content: center;
+gap: 8px;
+margin: 28px auto;
+max-width: 650px;
+}
+
+.tag {
+padding: 7px 13px;
+border-radius: 999px;
+background: #f8e9f1;
+color: #76596c;
+font-size: 13px;
+font-weight: 700;
+}
+
+.big-btn {
+width: min(580px,100%);
+min-height: 62px;
+border: 0;
+border-radius: 20px;
+background: linear-gradient(135deg,#b64f8e,#a63f7d);
+color: white;
+font-size: 20px;
+font-weight: 900;
+cursor: pointer;
+box-shadow: 0 12px 25px rgba(166,62,124,.2);
+}
+
+.sub-btn {
+display: block;
+margin: 25px auto 0;
+border: 0;
+background: transparent;
+color: #795b70;
+font-weight: 800;
+cursor: pointer;
+}
+
+/* -------------------------
+FINAL
+------------------------- */
+
+.final-header {
+text-align: center;
+padding: 35px 0 25px;
+}
+
+.final-header small {
+color: #98728b;
+letter-spacing: .2em;
+font-weight: 900;
+}
+
+.final-header h1 {
+font-size: clamp(32px,8vw,55px);
+margin: 10px 0;
+line-height: 1.15;
+letter-spacing: -.06em;
+}
+
+.final-header p {
+color: #8a7782;
+font-size: 17px;
+}
+
+.final-grid {
+display: grid;
+grid-template-columns: repeat(3, 1fr);
+gap: 13px;
+}
+
+.final-card {
+background: white;
+border-radius: 20px;
+overflow: hidden;
+border: 2px solid #e7dfe4;
+box-shadow: 0 5px 18px rgba(100,70,90,.08);
+}
+
+.final-card.first {
+border: 7px solid #e0ad34;
+box-shadow:
+0 0 0 4px #f3d7e8,
+0 12px 30px rgba(204,153,40,.2);
+}
+
+.final-image-wrap {
+position: relative;
+}
+
+.final-card img {
+display: block;
+width: 100%;
+aspect-ratio: 1 / 1;
+object-fit: cover;
+}
+
+.rank {
+position: absolute;
+top: 9px;
+left: 9px;
+
+background: rgba(255,255,255,.96);
+border-radius: 999px;
+
+padding: 7px 11px;
+
+font-weight: 1000;
+font-size: 15px;
+}
+
+.first .rank {
+background: #e4ae36;
+color: white;
+}
+
+.final-info {
+text-align: center;
+padding: 11px 5px 14px;
+}
+
+.final-name {
+font-weight: 900;
+font-size: 15px;
+}
+
+.final-group {
+margin-top: 3px;
+color: #8c7b86;
+font-size: 12px;
+}
+
+/* -------------------------
+VS
+------------------------- */
+
+.vs-title {
+text-align: center;
+padding: 25px 0;
+}
+
+.vs-title h1 {
+font-size: 29px;
+}
+
+.vs-title p {
+color: #8d7886;
+}
+
+.duel {
+display: grid;
+grid-template-columns: 1fr 1fr;
+gap: 14px;
+}
+
+.duel-card {
+border: 3px solid transparent;
+background: white;
+border-radius: 23px;
+overflow: hidden;
+cursor: pointer;
+box-shadow: 0 7px 22px rgba(100,70,90,.1);
+}
+
+.duel-card:active {
+transform: scale(.98);
+}
+
+.duel-card img {
+width: 100%;
+aspect-ratio: 1 / 1;
+object-fit: cover;
+display: block;
+}
+
+.duel-name {
+text-align: center;
+padding: 15px;
+font-size: 19px;
+font-weight: 900;
+}
+
+/* -------------------------
+RESPONSIVE
+------------------------- */
+
+@media (max-width: 500px) {
+
+.page {
+padding-left: 12px;
+padding-right: 12px;
+}
+
+.cards {
+gap: 10px;
+}
+
+.member-info {
+padding: 10px 11px 12px;
+}
+
+.member-name {
+font-size: 16px;
+}
+
+.heart {
+width: 38px;
+height: 38px;
+font-size: 20px;
+top: 8px;
+right: 8px;
+}
+
+.final-grid {
+gap: 8px;
+}
+
+.final-card {
+border-radius: 16px;
+}
+
+.final-card.first {
+border-width: 5px;
+}
+
+.final-name {
+font-size: 13px;
+}
+
+.final-group {
+font-size: 10px;
+}
+}
+</style>
+</head>
+
+<body>
+
+<div id="app"></div>
+
+<script src="members.js"></script>
+
+<script>
+
+/* =========================================================
+RINDO 好き顔9
+========================================================= */
+
+const PRELIMINARY_ROUNDS = 35;
+const MAX_SELECTION = 3;
+const FINALISTS = 18;
+
+let state = {
+screen: "preliminary",
+round: 0,
+rounds: [],
+selected: new Set(),
+scores: {},
+finalists: [],
+ranking: [],
+duelIndex: 0
+};
+
+
+/* -------------------------
+Utility
+------------------------- */
+
+function shuffle(array) {
+const a = [...array];
+
+for (let i = a.length - 1; i > 0; i--) {
+const j = Math.floor(Math.random() * (i + 1));
+[a[i], a[j]] = [a[j], a[i]];
+}
+
+return a;
+}
+
+function memberById(id) {
+return MEMBERS.find(m => m.id === id);
+}
+
+
+/* -------------------------
+Make preliminary rounds
+------------------------- */
+
+function makeRounds() {
+
+let rounds = [];
+
+/*
+* まず全員が最低1回は登場
+*/
+let pool = shuffle(MEMBERS.map(m => m.id));
+
+while (pool.length) {
+const group = pool.splice(0, 4);
+
+if (group.length === 4) {
+rounds.push(group);
+}
+}
+
+/*
+* 35問になるまで追加
+*/
+while (rounds.length < PRELIMINARY_ROUNDS) {
+
+const group = shuffle(
+MEMBERS.map(m => m.id)
+).slice(0,4);
+
+rounds.push(group);
+}
+
+return rounds.slice(0, PRELIMINARY_ROUNDS);
+}
+
+
+/* -------------------------
+Start
+------------------------- */
+
+function start() {
+
+state = {
+screen: "preliminary",
+round: 0,
+rounds: makeRounds(),
+selected: new Set(),
+scores: {},
+finalists: [],
+ranking: [],
+duelIndex: 0
+};
+
+MEMBERS.forEach(m => {
+state.scores[m.id] = 0;
+});
+
+render();
+}
+
+
+/* -------------------------
+Select card
+------------------------- */
+
+function toggleMember(id) {
+
+if (state.selected.has(id)) {
+
+state.selected.delete(id);
+
+} else {
+
+if (state.selected.size >= MAX_SELECTION) {
+return;
+}
+
+state.selected.add(id);
+}
+
+render();
+}
+
+
+/* -------------------------
+Next preliminary
+------------------------- */
+
+function nextPreliminary() {
+
+if (state.selected.size === 0) {
+return;
+}
+
+state.selected.forEach(id => {
+state.scores[id]++;
+});
+
+state.selected.clear();
+state.round++;
+
+if (state.round >= PRELIMINARY_ROUNDS) {
+createFinalists();
+state.screen = "preliminaryResult";
+}
+
+render();
+}
+
+
+/* -------------------------
+Create finalists
+------------------------- */
+
+function createFinalists() {
+
+const sorted = [...MEMBERS]
+.sort((a,b) => {
+const score =
+state.scores[b.id] -
+state.scores[a.id];
+
+if (score !== 0) return score;
+
+return Math.random() - .5;
+});
+
+state.finalists =
+sorted
+.slice(0, FINALISTS)
+.map(m => m.id);
+
+/*
+* 最初の9人を暫定順位にする
+*/
+state.ranking =
+state.finalists.slice(0, 1);
+}
+
+
+/* -------------------------
+Preliminary result
+------------------------- */
+
+function showPreliminaryResult() {
+
+const finalists =
+state.finalists
+.map(memberById);
+
+document.getElementById("app").innerHTML = `
+
+<main class="page center-page">
+
+<div class="party">🎉</div>
+
+<div class="english">
+PRELIMINARY CLEAR
+</div>
+
+<h1 class="result-title">
+予選終了！
+</h1>
+
+<p class="result-description">
+好き顔候補は
+<span class="candidate-count">
+${finalists.length}人
+</span>
+でした。
+</p>
+
+<p class="result-description">
+ここから候補同士を直接比べる<br>
+「本選」へ進みます。
+</p>
+
+<div class="tags">
+${finalists.map(m => `
+<span class="tag">
+${escapeHtml(m.name)}
+</span>
+`).join("")}
+</div>
+
+<button class="big-btn"
+onclick="startFinal()">
+🔥 本選へ
+</button>
+
+<button class="sub-btn"
+onclick="start()">
+予選をもう一度やる
+</button>
+
+</main>
+`;
+}
+
+
+/* -------------------------
+Final tournament
+------------------------- */
+
+function startFinal() {
+
+/*
+* まず候補をシャッフル
+*/
+state.finalists =
+shuffle(state.finalists);
+
+state.ranking = [];
+state.duelIndex = 0;
+
+/*
+* insertion sort型の本選。
+* 1人ずつ順位に入れていく。
+*/
+state.currentFinalistIndex = 0;
+state.pendingMember =
+memberById(state.finalists[0]);
+
+state.ranking = [];
+
+state.screen = "final";
+renderFinal();
+}
+
+
+/* -------------------------
+Render final
+------------------------- */
+
+function renderFinal() {
+
+/*
+* まだ順位に誰もいない
+*/
+if (
+state.ranking.length === 0 &&
+state.currentFinalistIndex === 0
+) {
+
+state.ranking = [
+state.pendingMember.id
+];
+
+state.currentFinalistIndex = 1;
+}
+
+/*
+* 全候補を順位付けしたらTOP9
+*/
+if (
+state.currentFinalistIndex >=
+state.finalists.length
+) {
+
+state.screen = "result";
+renderResult();
+return;
+}
+
+const member =
+memberById(
+state.finalists[
+state.currentFinalistIndex
+]
+);
+
+/*
+* 比較位置
+*/
+const position =
+Math.min(
+state.duelIndex,
+state.ranking.length
+);
+
+/*
+* 既に最後まで比較した
+*/
+if (state.duelIndex >= state.ranking.length) {
+
+state.ranking.push(member.id);
+
+state.currentFinalistIndex++;
+state.duelIndex = 0;
+
+renderFinal();
+return;
+}
+
+const opponent =
+memberById(
+state.ranking[
+state.duelIndex
+]
+);
+
+document.getElementById("app").innerHTML = `
+
+<main class="page">
+
+<div class="topbar">
+
+<div class="phase">
+本選
+</div>
+
+<div class="progress-number">
+${state.currentFinalistIndex}
+/
+${state.finalists.length}
+</div>
+
+</div>
+
+<div class="progress">
+<div
+class="progress-bar"
+style="
+width:${
+state.currentFinalistIndex /
+state.finalists.length * 100
+}%
+">
+</div>
+</div>
+
+<div class="vs-title">
+
+<h1>
+どっちの顔が好き？
+</h1>
+
+<p>
+直感で選んでね 💗
+</p>
+
+</div>
+
+<div class="duel">
+
+${duelCard(opponent)}
+
+${duelCard(member)}
+
+</div>
+
+</main>
+`;
+}
+
+
+function duelCard(member) {
+
+return `
+
+<div
+class="duel-card"
+onclick="chooseFinal(${member.id})">
+
+<img
+src="${escapeAttr(member.image)}"
+alt="${escapeAttr(member.name)}"
+onerror="this.src='images/no-image.jpg'">
+
+<div class="duel-name">
+${escapeHtml(member.name)}
+</div>
+
+</div>
+
+`;
+}
+
+
+/* -------------------------
+Choose final
+------------------------- */
+
+function chooseFinal(winnerId) {
+
+const member =
+memberById(
+state.finalists[
+state.currentFinalistIndex
+]
+);
+
+const opponentId =
+state.ranking[
+state.duelIndex
+];
+
+if (winnerId === member.id) {
+
+/*
+* 新しい人が現在位置に入る
+*/
+state.ranking.splice(
+state.duelIndex,
+0,
+member.id
+);
+
+state.currentFinalistIndex++;
+state.duelIndex = 0;
+
+} else {
+
+/*
+* 次の順位候補と比較
+*/
+state.duelIndex++;
+}
+
+renderFinal();
+}
+
+
+/* -------------------------
+Result
+------------------------- */
+
+function renderResult() {
+
+const top9 =
+state.ranking
+.slice(0,9)
+.map(memberById);
+
+document.getElementById("app").innerHTML = `
+
+<main class="page">
+
+<section class="final-header">
+
+<small>
+YOUR RINDO SUKIGAO 9
+</small>
+
+<h1>
+あなたの<br>
+好き顔9選 👑
+</h1>
+
+<p>
+あなたの「顔が好き」TOP9
+</p>
+
+</section>
+
+<section class="final-grid">
+
+${top9.map((member,index) => `
+
+<article
+class="
+final-card
+${index === 0 ? "first" : ""}
+">
+
+<div class="final-image-wrap">
+
+<img
+src="${escapeAttr(member.image)}"
+alt="${escapeAttr(member.name)}"
+onerror="this.src='images/no-image.jpg'">
+
+<div class="rank">
+${index === 0 ? "👑 " : ""}
+${index + 1}位
+</div>
+
+</div>
+
+<div class="final-info">
+
+<div class="final-name">
+${escapeHtml(member.name)}
+</div>
+
+<div class="final-group">
+RINDO Entertainment
+</div>
+
+</div>
+
+</article>
+
+`).join("")}
+
+</section>
+
+<div style="
+text-align:center;
+padding:35px 0 20px;
+">
+
+<button
+class="big-btn"
+onclick="start()">
+もう一度やる
+</button>
+
+</div>
+
+</main>
+`;
+}
+
+
+/* -------------------------
+Preliminary screen
+------------------------- */
+
+function renderPreliminary() {
+
+const ids =
+state.rounds[state.round];
+
+const cards =
+ids.map(memberById);
+
+const progress =
+state.round /
+PRELIMINARY_ROUNDS * 100;
+
+document.getElementById("app").innerHTML = `
+
+<main class="page">
+
+<div class="topbar">
+
+<div class="phase">
+予選
+</div>
+
+<div class="progress-number">
+${state.round + 1}
+/
+${PRELIMINARY_ROUNDS}
+</div>
+
+<button
+class="home-btn"
+onclick="start()">
+トップへ
+</button>
+
+</div>
+
+<div class="progress">
+
+<div
+class="progress-bar"
+style="width:${progress}%">
+</div>
+
+</div>
+
+<section class="question-area">
+
+<h1>
+この中で好きな顔を選んでね
+</h1>
+
+<p>
+複数OK。深く考えず、直感でどうぞ💗
+</p>
+
+</section>
+
+<section class="cards">
+
+${cards.map(member => `
+
+<article
+class="
+member-card
+${
+state.selected.has(member.id)
+? "selected"
+: ""
+}
+"
+onclick="toggleMember(${member.id})">
+
+<img
+src="${escapeAttr(member.image)}"
+alt="${escapeAttr(member.name)}"
+loading="eager"
+onerror="this.src='images/no-image.jpg'">
+
+<div class="heart">
+${
+state.selected.has(member.id)
+? "♥"
+: "♡"
+}
+</div>
+
+<div class="member-info">
+
+<div class="member-name">
+${escapeHtml(member.name)}
+</div>
+
+<div class="member-group">
+RINDO Entertainment
+</div>
+
+</div>
+
+</article>
+
+`).join("")}
+
+</section>
+
+</main>
+
+<div class="bottom-bar">
+
+<div class="bottom-inner">
+
+<button
+class="back-btn"
+onclick="previousQuestion()"
+${state.round === 0 ? "disabled" : ""}>
+← ひとつ前
+</button>
+
+<div class="selected-count">
+選択中 ${state.selected.size} / ${MAX_SELECTION}
+</div>
+
+<button
+class="next-btn"
+onclick="nextPreliminary()"
+${state.selected.size === 0 ? "disabled" : ""}>
+次へ →
+</button>
+
+</div>
+
+</div>
+`;
+}
+
+
+/* -------------------------
+Previous
+------------------------- */
+
+function previousQuestion() {
+
+if (state.round <= 0) {
+return;
+}
+
+state.round--;
+
+state.selected.clear();
+
+render();
+}
+
+
+/* -------------------------
+Render
+------------------------- */
+
+function render() {
+
+if (state.screen === "preliminary") {
+renderPreliminary();
+return;
+}
+
+if (state.screen === "preliminaryResult") {
+showPreliminaryResult();
+return;
+}
+
+if (state.screen === "final") {
+renderFinal();
+return;
+}
+
+if (state.screen === "result") {
+renderResult();
+return;
+}
+}
+
+
+/* -------------------------
+HTML escape
+------------------------- */
+
+function escapeHtml(value) {
+
+return String(value)
+.replaceAll("&", "&amp;")
+.replaceAll("<", "&lt;")
+.replaceAll(">", "&gt;")
+.replaceAll('"', "&quot;")
+.replaceAll("'", "&#039;");
+}
+
+function escapeAttr(value) {
+return escapeHtml(value);
+}
+
+
+/* -------------------------
+START
+------------------------- */
+
+start();
+
+</script>
+
+</body>
+</html>
