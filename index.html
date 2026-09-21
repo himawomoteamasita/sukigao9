@@ -2,218 +2,186 @@
 <html lang="ja">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport"
-content="width=device-width, initial-scale=1.0,
-maximum-scale=1.0, user-scalable=no">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>RINDO 好き顔9</title>
+<title>RINDO 好き顔9選</title>
 
 <style>
 * {
 box-sizing: border-box;
--webkit-tap-highlight-color: transparent;
 }
 
-html {
-background: #fbf4f8;
-}
-
+html,
 body {
 margin: 0;
-background:
-linear-gradient(
-180deg,
-#fff9fc 0%,
-#fdf4f9 100%
-);
-color: #29252b;
+padding: 0;
+min-height: 100%;
 font-family:
 -apple-system,
 BlinkMacSystemFont,
 "Hiragino Kaku Gothic ProN",
 "Yu Gothic",
-"Noto Sans JP",
+Meiryo,
 sans-serif;
+background: #fff7fb;
+color: #333;
+}
+
+body {
+min-height: 100vh;
 }
 
 button {
 font: inherit;
 }
 
-#app {
-min-height: 100vh;
-}
-
-.page {
+.app {
 width: 100%;
-max-width: 760px;
+max-width: 900px;
 margin: 0 auto;
-padding: 18px 18px 110px;
+min-height: 100vh;
+padding-bottom: 110px;
 }
 
-/* -------------------------
+/* ------------------------------
 HEADER
-------------------------- */
+------------------------------ */
 
-.topbar {
-display: flex;
-align-items: center;
-justify-content: space-between;
-margin-bottom: 16px;
+.header {
+padding: 25px 20px 12px;
+text-align: center;
 }
 
-.phase {
-display: inline-flex;
-align-items: center;
-gap: 7px;
-padding: 8px 15px;
-border-radius: 999px;
-background: #f9e3ef;
-color: #7d536d;
+.logo {
+font-size: 13px;
 font-weight: 800;
+letter-spacing: 0.18em;
+color: #ff7da9;
+margin-bottom: 5px;
 }
 
-.phase::before {
-content: "🌱";
-}
-
-.progress-number {
-font-size: 18px;
-font-weight: 800;
-color: #6c5263;
-}
-
-.home-btn {
-border: 0;
-background: transparent;
-color: #806176;
-font-size: 16px;
-cursor: pointer;
+.progress-text {
+font-size: 13px;
+color: #777;
+font-weight: 700;
 }
 
 .progress {
-height: 10px;
+width: min(500px, calc(100% - 40px));
+height: 7px;
+background: #f3dce5;
 border-radius: 999px;
-background: #efdce8;
+margin: 12px auto 0;
 overflow: hidden;
 }
 
-.progress-bar {
+.progress-inner {
 height: 100%;
-width: 0%;
+background: linear-gradient(90deg, #ff86ae, #ffb2c9);
 border-radius: 999px;
-background: linear-gradient(90deg,#b34d89,#c2679e);
-transition: width .3s ease;
+transition: width 0.3s ease;
 }
 
-/* -------------------------
-QUESTION
-------------------------- */
+/* ------------------------------
+TITLES
+------------------------------ */
 
-.question-area {
+.title-area {
 text-align: center;
-padding: 26px 0 20px;
+padding: 22px 20px 20px;
 }
 
-.question-area h1 {
+.title {
 margin: 0;
-font-size: clamp(23px, 6vw, 34px);
-letter-spacing: -.04em;
+font-size: clamp(22px, 5vw, 32px);
+font-weight: 900;
+letter-spacing: 0.02em;
 }
 
-.question-area p {
-margin: 9px 0 0;
-color: #907b88;
-font-size: 16px;
+.subtitle {
+margin: 10px 0 0;
+color: #888;
+font-size: 13px;
+line-height: 1.7;
 }
+
+/* ------------------------------
+CARDS
+------------------------------ */
 
 .cards {
 display: grid;
-grid-template-columns: repeat(2, minmax(0, 1fr));
-gap: 16px;
+grid-template-columns: repeat(2, 1fr);
+gap: 15px;
+padding: 0 18px;
+max-width: 720px;
+margin: 0 auto;
 }
 
-/* -------------------------
-MEMBER CARD
-------------------------- */
-
-.member-card {
+.card {
 position: relative;
-background: white;
-border-radius: 23px;
+border: 3px solid transparent;
+border-radius: 20px;
 overflow: hidden;
-border: 2px solid transparent;
-box-shadow:
-0 8px 25px rgba(121,73,105,.08);
+background: white;
+box-shadow: 0 6px 20px rgba(120, 70, 90, 0.08);
 cursor: pointer;
 transition:
-transform .15s ease,
-border .15s ease,
-box-shadow .15s ease;
+transform 0.15s ease,
+border-color 0.15s ease,
+box-shadow 0.15s ease;
+padding: 0;
 }
 
-.member-card:active {
-transform: scale(.985);
+.card:hover {
+transform: translateY(-2px);
 }
 
-.member-card.selected {
-border-color: #b74e8e;
-box-shadow:
-0 0 0 4px rgba(183,78,142,.14),
-0 12px 30px rgba(121,73,105,.14);
+.card.selected {
+border-color: #ff79a7;
+box-shadow: 0 7px 25px rgba(255, 121, 167, 0.25);
 }
 
-.member-card img {
-display: block;
+.card-image {
 width: 100%;
-aspect-ratio: 1 / 1;
+aspect-ratio: 4 / 5;
 object-fit: cover;
-background: #eee;
+display: block;
+background: #f7e9ef;
 }
 
-.member-info {
-padding: 12px 14px 15px;
-}
-
-.member-name {
-font-size: 18px;
-font-weight: 900;
-}
-
-.member-group {
-margin-top: 4px;
-color: #8c7a86;
-font-size: 13px;
+.card-name {
+padding: 11px 8px 13px;
+text-align: center;
+font-size: 16px;
+font-weight: 800;
+color: #333;
 }
 
 .heart {
 position: absolute;
-top: 12px;
-right: 12px;
-
-width: 45px;
-height: 45px;
-
-display: grid;
-place-items: center;
-
+top: 9px;
+right: 9px;
+width: 38px;
+height: 38px;
 border-radius: 50%;
-background: rgba(255,255,255,.92);
-
-font-size: 23px;
-color: #d0bac8;
-
-box-shadow: 0 3px 12px rgba(0,0,0,.08);
+background: rgba(255,255,255,0.92);
+display: flex;
+align-items: center;
+justify-content: center;
+font-size: 20px;
+color: #ddd;
+box-shadow: 0 3px 10px rgba(0,0,0,0.08);
 }
 
-.selected .heart {
-color: #c24d91;
-background: #fff;
+.card.selected .heart {
+color: #ff5d93;
+background: white;
 }
 
-/* -------------------------
+/* ------------------------------
 BOTTOM BAR
-------------------------- */
+------------------------------ */
 
 .bottom-bar {
 position: fixed;
@@ -221,335 +189,336 @@ z-index: 20;
 left: 0;
 right: 0;
 bottom: 0;
-
-background: rgba(255,255,255,.96);
-backdrop-filter: blur(14px);
-
-border-top: 1px solid #eadfe5;
-
-padding:
-13px
-max(16px, env(safe-area-inset-right))
-calc(13px + env(safe-area-inset-bottom))
-max(16px, env(safe-area-inset-left));
+background: rgba(255,255,255,0.96);
+backdrop-filter: blur(12px);
+border-top: 1px solid #f0dce5;
+padding: 13px 16px calc(13px + env(safe-area-inset-bottom));
 }
 
 .bottom-inner {
-max-width: 760px;
-margin: auto;
-
+max-width: 720px;
+margin: 0 auto;
 display: grid;
 grid-template-columns: 1fr auto 1fr;
 align-items: center;
-gap: 12px;
+gap: 10px;
 }
 
-.back-btn,
-.next-btn {
-min-height: 55px;
-border-radius: 18px;
-border: 1px solid #eee3e9;
-background: white;
+.back-button,
+.next-button {
+border: none;
+border-radius: 999px;
+min-height: 48px;
+padding: 0 20px;
 font-weight: 800;
 cursor: pointer;
 }
 
-.back-btn {
-color: #c9bdc5;
+.back-button {
+background: #f4eef1;
+color: #777;
 }
 
-.next-btn {
-border: 0;
+.back-button:disabled {
+opacity: 0.35;
+cursor: default;
+}
+
+.next-button {
+background: #ff78a5;
 color: white;
-background:
-linear-gradient(135deg,#b64f8e,#a83f7d);
-box-shadow: 0 7px 18px rgba(166,62,124,.23);
 }
 
-.next-btn:disabled {
-opacity: .45;
+.next-button:disabled {
+background: #e7dce1;
+color: #aaa;
+cursor: default;
 }
 
-.selected-count {
-font-weight: 900;
-color: #6e5666;
+.selection-count {
+font-size: 13px;
+text-align: center;
+color: #777;
+font-weight: 700;
 white-space: nowrap;
 }
 
-/* -------------------------
-PRELIMINARY RESULT
-------------------------- */
+/* ------------------------------
+RESULT / SCREEN
+------------------------------ */
 
-.center-page {
+.screen {
+min-height: 100vh;
+}
+
+.center-screen {
+padding: 70px 20px 100px;
 text-align: center;
-padding-top: 55px;
 }
 
-.party {
-font-size: 42px;
-}
-
-.english {
-margin-top: 16px;
-color: #9b718a;
-font-weight: 900;
-letter-spacing: .18em;
+.clear-label {
 font-size: 13px;
-}
-
-.result-title {
-margin: 10px 0 22px;
-font-size: 42px;
-font-weight: 1000;
-letter-spacing: -.06em;
-}
-
-.result-description {
-color: #756773;
-font-size: 18px;
-line-height: 1.8;
-}
-
-.candidate-count {
-font-size: 24px;
+letter-spacing: 0.18em;
 font-weight: 900;
-color: #332a31;
+color: #ff78a5;
 }
 
-.tags {
+.clear-title {
+margin: 12px 0 0;
+font-size: clamp(28px, 7vw, 42px);
+font-weight: 900;
+}
+
+.clear-text {
+color: #888;
+line-height: 1.8;
+font-size: 14px;
+margin: 15px auto 28px;
+}
+
+.candidate-list {
 display: flex;
 flex-wrap: wrap;
 justify-content: center;
 gap: 8px;
-margin: 28px auto;
 max-width: 650px;
+margin: 0 auto 35px;
 }
 
-.tag {
-padding: 7px 13px;
+.candidate {
+background: white;
+border: 1px solid #f0dce5;
+padding: 9px 13px;
 border-radius: 999px;
-background: #f8e9f1;
-color: #76596c;
 font-size: 13px;
 font-weight: 700;
 }
 
-.big-btn {
-width: min(580px,100%);
-min-height: 62px;
-border: 0;
-border-radius: 20px;
-background: linear-gradient(135deg,#b64f8e,#a63f7d);
+.main-button {
+border: none;
+background: #ff78a5;
 color: white;
-font-size: 20px;
+border-radius: 999px;
+padding: 16px 30px;
+font-size: 16px;
 font-weight: 900;
 cursor: pointer;
-box-shadow: 0 12px 25px rgba(166,62,124,.2);
+box-shadow: 0 8px 20px rgba(255, 120, 165, 0.25);
 }
 
-.sub-btn {
-display: block;
-margin: 25px auto 0;
-border: 0;
-background: transparent;
-color: #795b70;
-font-weight: 800;
-cursor: pointer;
-}
-
-/* -------------------------
+/* ------------------------------
 FINAL
-------------------------- */
+------------------------------ */
 
 .final-header {
 text-align: center;
-padding: 35px 0 25px;
+padding: 40px 20px 25px;
 }
 
-.final-header small {
-color: #98728b;
-letter-spacing: .2em;
+.final-label {
+color: #ff78a5;
+font-size: 13px;
+font-weight: 900;
+letter-spacing: 0.18em;
+}
+
+.final-title {
+margin: 10px 0 0;
+font-size: clamp(25px, 7vw, 40px);
 font-weight: 900;
 }
 
-.final-header h1 {
-font-size: clamp(32px,8vw,55px);
-margin: 10px 0;
-line-height: 1.15;
-letter-spacing: -.06em;
-}
-
-.final-header p {
-color: #8a7782;
-font-size: 17px;
+.final-subtitle {
+margin-top: 8px;
+color: #888;
+font-size: 13px;
 }
 
 .final-grid {
 display: grid;
 grid-template-columns: repeat(3, 1fr);
-gap: 13px;
+gap: 12px;
+padding: 0 15px 30px;
+max-width: 780px;
+margin: 0 auto;
 }
 
-.final-card {
-background: white;
-border-radius: 20px;
-overflow: hidden;
-border: 2px solid #e7dfe4;
-box-shadow: 0 5px 18px rgba(100,70,90,.08);
-}
-
-.final-card.first {
-border: 7px solid #e0ad34;
-box-shadow:
-0 0 0 4px #f3d7e8,
-0 12px 30px rgba(204,153,40,.2);
-}
-
-.final-image-wrap {
+.rank-card {
 position: relative;
+background: white;
+border-radius: 18px;
+overflow: hidden;
+box-shadow: 0 5px 18px rgba(100, 50, 70, 0.09);
 }
 
-.final-card img {
-display: block;
+.rank-card.rank-1 {
+box-shadow:
+0 0 0 3px #ffd66b,
+0 8px 25px rgba(255, 190, 70, 0.22);
+}
+
+.rank-image {
 width: 100%;
-aspect-ratio: 1 / 1;
+aspect-ratio: 4 / 5;
 object-fit: cover;
+display: block;
 }
 
-.rank {
+.rank-number {
 position: absolute;
-top: 9px;
-left: 9px;
-
-background: rgba(255,255,255,.96);
-border-radius: 999px;
-
-padding: 7px 11px;
-
-font-weight: 1000;
-font-size: 15px;
+top: 7px;
+left: 7px;
+width: 34px;
+height: 34px;
+border-radius: 50%;
+background: rgba(255,255,255,0.95);
+display: flex;
+justify-content: center;
+align-items: center;
+font-size: 14px;
+font-weight: 900;
+color: #555;
 }
 
-.first .rank {
-background: #e4ae36;
+.rank-card.rank-1 .rank-number {
+background: #ffd66b;
 color: white;
 }
 
-.final-info {
+.rank-name {
+padding: 9px 5px 11px;
 text-align: center;
-padding: 11px 5px 14px;
-}
-
-.final-name {
+font-size: 14px;
 font-weight: 900;
-font-size: 15px;
 }
 
-.final-group {
-margin-top: 3px;
-color: #8c7b86;
-font-size: 12px;
-}
-
-/* -------------------------
-VS
-------------------------- */
-
-.vs-title {
+.final-actions {
 text-align: center;
-padding: 25px 0;
+padding: 10px 20px 60px;
 }
 
-.vs-title h1 {
-font-size: 29px;
+/* ------------------------------
+HEAD TO HEAD
+------------------------------ */
+
+.battle-screen {
+padding: 25px 15px 60px;
+min-height: 100vh;
 }
 
-.vs-title p {
-color: #8d7886;
+.battle-top {
+text-align: center;
+margin-bottom: 22px;
 }
 
-.duel {
+.battle-label {
+color: #ff78a5;
+font-size: 12px;
+font-weight: 900;
+letter-spacing: 0.15em;
+}
+
+.battle-title {
+font-size: 23px;
+font-weight: 900;
+margin: 8px 0 5px;
+}
+
+.battle-count {
+font-size: 12px;
+color: #999;
+}
+
+.battle-cards {
 display: grid;
-grid-template-columns: 1fr 1fr;
-gap: 14px;
+grid-template-columns: repeat(2, 1fr);
+gap: 12px;
+max-width: 720px;
+margin: 0 auto;
 }
 
-.duel-card {
+.battle-card {
 border: 3px solid transparent;
-background: white;
-border-radius: 23px;
+border-radius: 20px;
 overflow: hidden;
+background: white;
+box-shadow: 0 7px 25px rgba(100,50,70,0.10);
 cursor: pointer;
-box-shadow: 0 7px 22px rgba(100,70,90,.1);
+padding: 0;
 }
 
-.duel-card:active {
-transform: scale(.98);
+.battle-card:hover {
+border-color: #ff91b5;
 }
 
-.duel-card img {
+.battle-card img {
 width: 100%;
-aspect-ratio: 1 / 1;
+aspect-ratio: 4 / 5;
 object-fit: cover;
 display: block;
 }
 
-.duel-name {
-text-align: center;
-padding: 15px;
-font-size: 19px;
+.battle-name {
+padding: 15px 5px;
+font-size: 17px;
 font-weight: 900;
 }
 
-/* -------------------------
-RESPONSIVE
-------------------------- */
-
-@media (max-width: 500px) {
-
-.page {
-padding-left: 12px;
-padding-right: 12px;
+.battle-hint {
+text-align: center;
+color: #999;
+font-size: 12px;
+margin-top: 18px;
 }
 
+/* ------------------------------
+MOBILE
+------------------------------ */
+
+@media (max-width: 480px) {
 .cards {
 gap: 10px;
+padding: 0 10px;
 }
 
-.member-info {
-padding: 10px 11px 12px;
+.card {
+border-radius: 15px;
 }
 
-.member-name {
-font-size: 16px;
+.card-name {
+font-size: 14px;
+padding: 9px 4px 11px;
 }
 
 .heart {
-width: 38px;
-height: 38px;
-font-size: 20px;
-top: 8px;
-right: 8px;
+width: 32px;
+height: 32px;
+font-size: 17px;
+}
+
+.bottom-inner {
+grid-template-columns: auto 1fr auto;
+}
+
+.back-button,
+.next-button {
+padding: 0 15px;
 }
 
 .final-grid {
 gap: 8px;
+padding-left: 8px;
+padding-right: 8px;
 }
 
-.final-card {
-border-radius: 16px;
+.rank-name {
+font-size: 12px;
 }
 
-.final-card.first {
-border-width: 5px;
-}
-
-.final-name {
-font-size: 13px;
-}
-
-.final-group {
-font-size: 10px;
+.rank-number {
+width: 29px;
+height: 29px;
+font-size: 12px;
 }
 }
 </style>
@@ -557,698 +526,846 @@ font-size: 10px;
 
 <body>
 
-<div id="app"></div>
-
-<script src="members.js"></script>
+<div id="app" class="app"></div>
 
 <script>
 
 /* =========================================================
-RINDO 好き顔9
+RINDO Entertainment TALENT
+同名掲載は1名にまとめています
 ========================================================= */
 
-const PRELIMINARY_ROUNDS = 35;
-const MAX_SELECTION = 3;
+const names = [
+"なめ",
+"つばき",
+"うと",
+"ないち",
+"りう",
+"りんたろ。",
+"はく",
+"みお",
+"けん",
+"えつや",
+"ふゆみ",
+"かなめ",
+"あむ",
+"ゆき",
+"さく",
+"しょうた",
+"きょうへい",
+"らいと",
+"はやと",
+"とあ",
+"ねる",
+"うみ",
+"らん",
+"そう",
+"たく",
+"めあ",
+"ひろ",
+"てん",
+"さくら",
+"ゆそん",
+"たいよう",
+"はやて",
+"りょう",
+"さつき",
+"たろ",
+"こうた",
+"はも",
+"せな",
+"伊藤。",
+"けい",
+"こむぎ",
+"あゆむ",
+"はると",
+"みなと",
+"ゆうま",
+"ゆたか",
+"いぶき",
+"ふうま",
+"たいちん",
+"ひかる",
+"だいち",
+"あさひ",
+"こんちゃん",
+"みやび",
+"かい",
+"やまだ",
+"つかさ",
+"なお",
+"うた",
+"あとむ",
+"しき",
+"ひゅうが",
+"あらた",
+"りき",
+"じん",
+"うぃる",
+"つばさ",
+"なぎさ",
+"フマル",
+"りゅうせい",
+"あかね",
+"りお",
+"なつ",
+"禊",
+"タイ・マイ",
+"梅",
+"なつめ",
+"よきき",
+"りゅーと",
+"かぐや",
+"れお",
+"あさと",
+"しの",
+"そらん"
+];
+
+
+/* =========================================================
+メンバー情報
+
+画像は
+images/001.jpg
+images/002.jpg
+...
+images/084.jpg
+
+のように入れてください。
+========================================================= */
+
+const members = names.map((name, index) => ({
+id: index + 1,
+name: name,
+image: `images/${String(index + 1).padStart(3, "0")}.jpg`
+}));
+
+
+/* =========================================================
+状態
+========================================================= */
+
+const TOTAL_ROUNDS = 35;
 const FINALISTS = 18;
 
-let state = {
-screen: "preliminary",
-round: 0,
-rounds: [],
-selected: new Set(),
-scores: {},
-finalists: [],
-ranking: [],
-duelIndex: 0
-};
+let round = 0;
+
+let selected = new Set();
+
+let answers = [];
+
+let scores = {};
+
+let preliminaryRounds = [];
+
+let finalists = [];
+
+let ranking = [];
+
+let challengerIndex = 1;
+
+let battleCount = 0;
 
 
-/* -------------------------
-Utility
-------------------------- */
+/* =========================================================
+初期化
+========================================================= */
+
+function resetGame() {
+
+round = 0;
+
+selected = new Set();
+
+answers = [];
+
+scores = {};
+
+finalists = [];
+
+ranking = [];
+
+challengerIndex = 1;
+
+battleCount = 0;
+
+members.forEach(member => {
+scores[member.id] = 0;
+});
+
+createPreliminaryRounds();
+
+showPreliminary();
+}
+
+
+/* =========================================================
+予選35ラウンドを作る
+========================================================= */
 
 function shuffle(array) {
-const a = [...array];
 
-for (let i = a.length - 1; i > 0; i--) {
+const result = [...array];
+
+for (let i = result.length - 1; i > 0; i--) {
+
 const j = Math.floor(Math.random() * (i + 1));
-[a[i], a[j]] = [a[j], a[i]];
+
+[result[i], result[j]] = [result[j], result[i]];
 }
 
-return a;
-}
-
-function memberById(id) {
-return MEMBERS.find(m => m.id === id);
+return result;
 }
 
 
-/* -------------------------
-Make preliminary rounds
-------------------------- */
+function randomFour() {
 
-function makeRounds() {
+return shuffle(members)
+.slice(0, 4);
+}
 
-let rounds = [];
+
+function createPreliminaryRounds() {
+
+preliminaryRounds = [];
 
 /*
-* まず全員が最低1回は登場
+最初の21ラウンドで84人全員を一度ずつ出す
 */
-let pool = shuffle(MEMBERS.map(m => m.id));
 
-while (pool.length) {
-const group = pool.splice(0, 4);
+const pool = shuffle(members);
 
-if (group.length === 4) {
-rounds.push(group);
-}
+for (let i = 0; i < pool.length; i += 4) {
+
+preliminaryRounds.push(
+pool.slice(i, i + 4)
+);
 }
 
 /*
-* 35問になるまで追加
+残り14ラウンドはランダム
 */
-while (rounds.length < PRELIMINARY_ROUNDS) {
 
-const group = shuffle(
-MEMBERS.map(m => m.id)
-).slice(0,4);
+while (preliminaryRounds.length < TOTAL_ROUNDS) {
 
-rounds.push(group);
+preliminaryRounds.push(
+randomFour()
+);
 }
-
-return rounds.slice(0, PRELIMINARY_ROUNDS);
 }
 
 
-/* -------------------------
-Start
-------------------------- */
+/* =========================================================
+画像
+========================================================= */
 
-function start() {
+function placeholderImage(name) {
 
-state = {
-screen: "preliminary",
-round: 0,
-rounds: makeRounds(),
-selected: new Set(),
-scores: {},
-finalists: [],
-ranking: [],
-duelIndex: 0
-};
+const first = name.charAt(0);
 
-MEMBERS.forEach(m => {
-state.scores[m.id] = 0;
-});
+const svg = `
+<svg xmlns="http://www.w3.org/2000/svg"
+width="600"
+height="750"
+viewBox="0 0 600 750">
 
-render();
-}
+<defs>
+<linearGradient id="bg"
+x1="0"
+y1="0"
+x2="1"
+y2="1">
+<stop offset="0%" stop-color="#ffe5ef"/>
+<stop offset="100%" stop-color="#f8c8d9"/>
+</linearGradient>
+</defs>
 
+<rect width="600"
+height="750"
+fill="url(#bg)"/>
 
-/* -------------------------
-Select card
-------------------------- */
+<circle cx="300"
+cy="280"
+r="120"
+fill="#fff"
+opacity="0.8"/>
 
-function toggleMember(id) {
+<circle cx="255"
+cy="270"
+r="10"
+fill="#777"/>
 
-if (state.selected.has(id)) {
+<circle cx="345"
+cy="270"
+r="10"
+fill="#777"/>
 
-state.selected.delete(id);
+<path d="M250 340 Q300 380 350 340"
+fill="none"
+stroke="#777"
+stroke-width="8"
+stroke-linecap="round"/>
 
-} else {
+<text x="300"
+y="520"
+text-anchor="middle"
+font-size="70"
+font-weight="bold"
+fill="#555">${first}</text>
 
-if (state.selected.size >= MAX_SELECTION) {
-return;
-}
-
-state.selected.add(id);
-}
-
-render();
-}
-
-
-/* -------------------------
-Next preliminary
-------------------------- */
-
-function nextPreliminary() {
-
-if (state.selected.size === 0) {
-return;
-}
-
-state.selected.forEach(id => {
-state.scores[id]++;
-});
-
-state.selected.clear();
-state.round++;
-
-if (state.round >= PRELIMINARY_ROUNDS) {
-createFinalists();
-state.screen = "preliminaryResult";
-}
-
-render();
-}
-
-
-/* -------------------------
-Create finalists
-------------------------- */
-
-function createFinalists() {
-
-const sorted = [...MEMBERS]
-.sort((a,b) => {
-const score =
-state.scores[b.id] -
-state.scores[a.id];
-
-if (score !== 0) return score;
-
-return Math.random() - .5;
-});
-
-state.finalists =
-sorted
-.slice(0, FINALISTS)
-.map(m => m.id);
-
-/*
-* 最初の9人を暫定順位にする
-*/
-state.ranking =
-state.finalists.slice(0, 1);
-}
-
-
-/* -------------------------
-Preliminary result
-------------------------- */
-
-function showPreliminaryResult() {
-
-const finalists =
-state.finalists
-.map(memberById);
-
-document.getElementById("app").innerHTML = `
-
-<main class="page center-page">
-
-<div class="party">🎉</div>
-
-<div class="english">
-PRELIMINARY CLEAR
-</div>
-
-<h1 class="result-title">
-予選終了！
-</h1>
-
-<p class="result-description">
-好き顔候補は
-<span class="candidate-count">
-${finalists.length}人
-</span>
-でした。
-</p>
-
-<p class="result-description">
-ここから候補同士を直接比べる<br>
-「本選」へ進みます。
-</p>
-
-<div class="tags">
-${finalists.map(m => `
-<span class="tag">
-${escapeHtml(m.name)}
-</span>
-`).join("")}
-</div>
-
-<button class="big-btn"
-onclick="startFinal()">
-🔥 本選へ
-</button>
-
-<button class="sub-btn"
-onclick="start()">
-予選をもう一度やる
-</button>
-
-</main>
+<text x="300"
+y="600"
+text-anchor="middle"
+font-size="30"
+font-weight="bold"
+fill="#777">PHOTO</text>
+</svg>
 `;
+
+return "data:image/svg+xml;charset=UTF-8," +
+encodeURIComponent(svg);
 }
 
 
-/* -------------------------
-Final tournament
-------------------------- */
-
-function startFinal() {
-
-/*
-* まず候補をシャッフル
-*/
-state.finalists =
-shuffle(state.finalists);
-
-state.ranking = [];
-state.duelIndex = 0;
-
-/*
-* insertion sort型の本選。
-* 1人ずつ順位に入れていく。
-*/
-state.currentFinalistIndex = 0;
-state.pendingMember =
-memberById(state.finalists[0]);
-
-state.ranking = [];
-
-state.screen = "final";
-renderFinal();
-}
-
-
-/* -------------------------
-Render final
-------------------------- */
-
-function renderFinal() {
-
-/*
-* まだ順位に誰もいない
-*/
-if (
-state.ranking.length === 0 &&
-state.currentFinalistIndex === 0
-) {
-
-state.ranking = [
-state.pendingMember.id
-];
-
-state.currentFinalistIndex = 1;
-}
-
-/*
-* 全候補を順位付けしたらTOP9
-*/
-if (
-state.currentFinalistIndex >=
-state.finalists.length
-) {
-
-state.screen = "result";
-renderResult();
-return;
-}
-
-const member =
-memberById(
-state.finalists[
-state.currentFinalistIndex
-]
-);
-
-/*
-* 比較位置
-*/
-const position =
-Math.min(
-state.duelIndex,
-state.ranking.length
-);
-
-/*
-* 既に最後まで比較した
-*/
-if (state.duelIndex >= state.ranking.length) {
-
-state.ranking.push(member.id);
-
-state.currentFinalistIndex++;
-state.duelIndex = 0;
-
-renderFinal();
-return;
-}
-
-const opponent =
-memberById(
-state.ranking[
-state.duelIndex
-]
-);
-
-document.getElementById("app").innerHTML = `
-
-<main class="page">
-
-<div class="topbar">
-
-<div class="phase">
-本選
-</div>
-
-<div class="progress-number">
-${state.currentFinalistIndex}
-/
-${state.finalists.length}
-</div>
-
-</div>
-
-<div class="progress">
-<div
-class="progress-bar"
-style="
-width:${
-state.currentFinalistIndex /
-state.finalists.length * 100
-}%
-">
-</div>
-</div>
-
-<div class="vs-title">
-
-<h1>
-どっちの顔が好き？
-</h1>
-
-<p>
-直感で選んでね 💗
-</p>
-
-</div>
-
-<div class="duel">
-
-${duelCard(opponent)}
-
-${duelCard(member)}
-
-</div>
-
-</main>
-`;
-}
-
-
-function duelCard(member) {
+function imageHTML(member, className) {
 
 return `
-
-<div
-class="duel-card"
-onclick="chooseFinal(${member.id})">
-
 <img
-src="${escapeAttr(member.image)}"
-alt="${escapeAttr(member.name)}"
-onerror="this.src='images/no-image.jpg'">
-
-<div class="duel-name">
-${escapeHtml(member.name)}
-</div>
-
-</div>
-
+class="${className}"
+src="${member.image}"
+alt="${member.name}"
+onerror="this.onerror=null; this.src='${placeholderImage(member.name)}';"
+>
 `;
 }
 
 
-/* -------------------------
-Choose final
-------------------------- */
+/* =========================================================
+予選画面
+========================================================= */
 
-function chooseFinal(winnerId) {
+function showPreliminary() {
 
-const member =
-memberById(
-state.finalists[
-state.currentFinalistIndex
-]
-);
-
-const opponentId =
-state.ranking[
-state.duelIndex
-];
-
-if (winnerId === member.id) {
-
-/*
-* 新しい人が現在位置に入る
-*/
-state.ranking.splice(
-state.duelIndex,
-0,
-member.id
-);
-
-state.currentFinalistIndex++;
-state.duelIndex = 0;
-
-} else {
-
-/*
-* 次の順位候補と比較
-*/
-state.duelIndex++;
-}
-
-renderFinal();
-}
-
-
-/* -------------------------
-Result
-------------------------- */
-
-function renderResult() {
-
-const top9 =
-state.ranking
-.slice(0,9)
-.map(memberById);
-
-document.getElementById("app").innerHTML = `
-
-<main class="page">
-
-<section class="final-header">
-
-<small>
-YOUR RINDO SUKIGAO 9
-</small>
-
-<h1>
-あなたの<br>
-好き顔9選 👑
-</h1>
-
-<p>
-あなたの「顔が好き」TOP9
-</p>
-
-</section>
-
-<section class="final-grid">
-
-${top9.map((member,index) => `
-
-<article
-class="
-final-card
-${index === 0 ? "first" : ""}
-">
-
-<div class="final-image-wrap">
-
-<img
-src="${escapeAttr(member.image)}"
-alt="${escapeAttr(member.name)}"
-onerror="this.src='images/no-image.jpg'">
-
-<div class="rank">
-${index === 0 ? "👑 " : ""}
-${index + 1}位
-</div>
-
-</div>
-
-<div class="final-info">
-
-<div class="final-name">
-${escapeHtml(member.name)}
-</div>
-
-<div class="final-group">
-RINDO Entertainment
-</div>
-
-</div>
-
-</article>
-
-`).join("")}
-
-</section>
-
-<div style="
-text-align:center;
-padding:35px 0 20px;
-">
-
-<button
-class="big-btn"
-onclick="start()">
-もう一度やる
-</button>
-
-</div>
-
-</main>
-`;
-}
-
-
-/* -------------------------
-Preliminary screen
-------------------------- */
-
-function renderPreliminary() {
-
-const ids =
-state.rounds[state.round];
-
-const cards =
-ids.map(memberById);
+const currentCards = preliminaryRounds[round];
 
 const progress =
-state.round /
-PRELIMINARY_ROUNDS * 100;
+((round + 1) / TOTAL_ROUNDS) * 100;
 
 document.getElementById("app").innerHTML = `
 
-<main class="page">
+<div class="screen">
 
-<div class="topbar">
+<header class="header">
 
-<div class="phase">
-予選
+<div class="logo">
+RINDO ENTERTAINMENT
 </div>
 
-<div class="progress-number">
-${state.round + 1}
-/
-${PRELIMINARY_ROUNDS}
-</div>
-
-<button
-class="home-btn"
-onclick="start()">
-トップへ
-</button>
-
+<div class="progress-text">
+予選 ${round + 1} / ${TOTAL_ROUNDS}
 </div>
 
 <div class="progress">
-
 <div
-class="progress-bar"
+class="progress-inner"
 style="width:${progress}%">
 </div>
-
 </div>
 
-<section class="question-area">
+</header>
 
-<h1>
+
+<section class="title-area">
+
+<h1 class="title">
 この中で好きな顔を選んでね
 </h1>
 
-<p>
+<p class="subtitle">
 複数OK。深く考えず、直感でどうぞ💗
 </p>
 
 </section>
 
-<section class="cards">
 
-${cards.map(member => `
+<main class="cards">
 
-<article
-class="
-member-card
-${
-state.selected.has(member.id)
-? "selected"
-: ""
-}
-"
+${currentCards.map(member => `
+
+<button
+class="card ${selected.has(member.id) ? "selected" : ""}"
 onclick="toggleMember(${member.id})">
 
-<img
-src="${escapeAttr(member.image)}"
-alt="${escapeAttr(member.name)}"
-loading="eager"
-onerror="this.src='images/no-image.jpg'">
+${imageHTML(member, "card-image")}
 
 <div class="heart">
-${
-state.selected.has(member.id)
-? "♥"
-: "♡"
-}
+${selected.has(member.id) ? "♥" : "♡"}
 </div>
 
-<div class="member-info">
-
-<div class="member-name">
-${escapeHtml(member.name)}
+<div class="card-name">
+${member.name}
 </div>
 
-<div class="member-group">
-RINDO Entertainment
-</div>
-
-</div>
-
-</article>
+</button>
 
 `).join("")}
 
-</section>
-
 </main>
+
 
 <div class="bottom-bar">
 
 <div class="bottom-inner">
 
 <button
-class="back-btn"
-onclick="previousQuestion()"
-${state.round === 0 ? "disabled" : ""}>
-← ひとつ前
+class="back-button"
+onclick="goBack()"
+${round === 0 ? "disabled" : ""}>
+← 戻る
 </button>
 
-<div class="selected-count">
-選択中 ${state.selected.size} / ${MAX_SELECTION}
+
+<div class="selection-count">
+${selected.size} / 3 人選択
 </div>
 
+
 <button
-class="next-btn"
-onclick="nextPreliminary()"
-${state.selected.size === 0 ? "disabled" : ""}>
-次へ →
+class="next-button"
+onclick="goNext()"
+${selected.size === 0 ? "disabled" : ""}>
+${round === TOTAL_ROUNDS - 1 ? "予選終了 →" : "次へ →"}
+</button>
+
+</div>
+
+</div>
+
+</div>
+`;
+}
+
+
+/* =========================================================
+選択
+========================================================= */
+
+function toggleMember(id) {
+
+if (selected.has(id)) {
+
+selected.delete(id);
+
+} else {
+
+if (selected.size >= 3) {
+return;
+}
+
+selected.add(id);
+}
+
+showPreliminary();
+}
+
+
+/* =========================================================
+次へ
+========================================================= */
+
+function goNext() {
+
+if (selected.size === 0) {
+return;
+}
+
+/*
+今回の回答を保存
+*/
+
+answers[round] = [...selected];
+
+
+/*
+スコア加算
+*/
+
+selected.forEach(id => {
+scores[id]++;
+});
+
+
+if (round === TOTAL_ROUNDS - 1) {
+
+createFinalists();
+
+showPreliminaryResult();
+
+return;
+}
+
+
+round++;
+
+selected = new Set();
+
+showPreliminary();
+}
+
+
+/* =========================================================
+戻る
+========================================================= */
+
+function goBack() {
+
+if (round === 0) {
+return;
+}
+
+/*
+現在のラウンドを1つ戻す
+*/
+
+round--;
+
+
+/*
+そのラウンドで以前選んだ人の
+スコアを取り消す
+*/
+
+const previousAnswer = answers[round] || [];
+
+previousAnswer.forEach(id => {
+scores[id]--;
+});
+
+
+selected = new Set(previousAnswer);
+
+showPreliminary();
+}
+
+
+/* =========================================================
+予選通過者
+========================================================= */
+
+function createFinalists() {
+
+finalists = [...members]
+.sort((a, b) => {
+
+const scoreDiff =
+scores[b.id] - scores[a.id];
+
+if (scoreDiff !== 0) {
+return scoreDiff;
+}
+
+return Math.random() - 0.5;
+})
+.slice(0, FINALISTS);
+}
+
+
+/* =========================================================
+予選結果
+========================================================= */
+
+function showPreliminaryResult() {
+
+document.getElementById("app").innerHTML = `
+
+<div class="screen center-screen">
+
+<div class="clear-label">
+PRELIMINARY CLEAR
+</div>
+
+<h1 class="clear-title">
+予選終了！
+</h1>
+
+<p class="clear-text">
+あなたの選んだ顔から<br>
+${FINALISTS}人が本選へ進みます。
+</p>
+
+
+<div class="candidate-list">
+
+${finalists.map(member => `
+
+<div class="candidate">
+${member.name}
+</div>
+
+`).join("")}
+
+</div>
+
+
+<button
+class="main-button"
+onclick="startFinal()">
+
+🔥 本選へ
+
+</button>
+
+</div>
+`;
+}
+
+
+/* =========================================================
+本選スタート
+========================================================= */
+
+function startFinal() {
+
+/*
+まず1人をランキングに置く
+*/
+
+ranking = [finalists[0]];
+
+challengerIndex = 1;
+
+battleCount = 0;
+
+showBattle();
+}
+
+
+/* =========================================================
+本選：1対1
+========================================================= */
+
+function showBattle() {
+
+if (challengerIndex >= finalists.length) {
+
+showFinalResult();
+
+return;
+}
+
+
+const challenger =
+finalists[challengerIndex];
+
+const opponentIndex =
+Math.min(
+battleCount,
+ranking.length
+);
+
+
+/*
+最初はランキングの上から比較
+*/
+
+const opponent =
+ranking[
+Math.min(
+battleCount,
+ranking.length - 1
+)
+];
+
+
+document.getElementById("app").innerHTML = `
+
+<div class="battle-screen">
+
+<div class="battle-top">
+
+<div class="battle-label">
+FINAL ROUND
+</div>
+
+<h1 class="battle-title">
+どっちの顔が好き？
+</h1>
+
+<div class="battle-count">
+${challengerIndex} / ${finalists.length - 1}
+</div>
+
+</div>
+
+
+<div class="battle-cards">
+
+<button
+class="battle-card"
+onclick="chooseBattle(${challenger.id}, ${opponent.id})">
+
+${imageHTML(challenger, "battle-image")}
+
+<div class="battle-name">
+${challenger.name}
+</div>
+
+</button>
+
+
+<button
+class="battle-card"
+onclick="chooseBattle(${opponent.id}, ${challenger.id})">
+
+${imageHTML(opponent, "battle-image")}
+
+<div class="battle-name">
+${opponent.name}
+</div>
+
+</button>
+
+</div>
+
+
+<div class="battle-hint">
+直感で好きなほうをタップしてね 💗
+</div>
+
+</div>
+`;
+}
+
+
+/* =========================================================
+本選で選択
+========================================================= */
+
+function chooseBattle(winnerId, loserId) {
+
+const challenger =
+finalists[challengerIndex];
+
+/*
+challengerが勝った場合
+現在比較している相手の前に入れる
+*/
+
+if (winnerId === challenger.id) {
+
+const insertIndex =
+Math.min(
+battleCount,
+ranking.length
+);
+
+ranking.splice(
+insertIndex,
+0,
+challenger
+);
+
+challengerIndex++;
+
+battleCount = 0;
+
+showBattle();
+
+return;
+}
+
+
+/*
+challengerが負けた場合
+次の順位候補と比較する
+*/
+
+battleCount++;
+
+
+if (battleCount >= ranking.length) {
+
+ranking.push(challenger);
+
+challengerIndex++;
+
+battleCount = 0;
+
+}
+
+
+showBattle();
+}
+
+
+/* =========================================================
+最終結果
+========================================================= */
+
+function showFinalResult() {
+
+/*
+念のため9人に限定
+*/
+
+const top9 =
+ranking.slice(0, 9);
+
+
+document.getElementById("app").innerHTML = `
+
+<div class="screen">
+
+<div class="final-header">
+
+<div class="final-label">
+YOUR SUKIGAO 9
+</div>
+
+<h1 class="final-title">
+あなたのRINDO好き顔9選 👑
+</h1>
+
+<div class="final-subtitle">
+あなたの直感で選ばれたTOP9
+</div>
+
+</div>
+
+
+<div class="final-grid">
+
+${top9.map((member, index) => `
+
+<div
+class="rank-card ${index === 0 ? "rank-1" : ""}">
+
+${imageHTML(member, "rank-image")}
+
+<div class="rank-number">
+${index + 1}
+</div>
+
+<div class="rank-name">
+${member.name}
+</div>
+
+</div>
+
+`).join("")}
+
+</div>
+
+
+<div class="final-actions">
+
+<button
+class="main-button"
+onclick="resetGame()">
+
+もう一度やる
+
 </button>
 
 </div>
@@ -1258,76 +1375,11 @@ ${state.selected.size === 0 ? "disabled" : ""}>
 }
 
 
-/* -------------------------
-Previous
-------------------------- */
-
-function previousQuestion() {
-
-if (state.round <= 0) {
-return;
-}
-
-state.round--;
-
-state.selected.clear();
-
-render();
-}
-
-
-/* -------------------------
-Render
-------------------------- */
-
-function render() {
-
-if (state.screen === "preliminary") {
-renderPreliminary();
-return;
-}
-
-if (state.screen === "preliminaryResult") {
-showPreliminaryResult();
-return;
-}
-
-if (state.screen === "final") {
-renderFinal();
-return;
-}
-
-if (state.screen === "result") {
-renderResult();
-return;
-}
-}
-
-
-/* -------------------------
-HTML escape
-------------------------- */
-
-function escapeHtml(value) {
-
-return String(value)
-.replaceAll("&", "&amp;")
-.replaceAll("<", "&lt;")
-.replaceAll(">", "&gt;")
-.replaceAll('"', "&quot;")
-.replaceAll("'", "&#039;");
-}
-
-function escapeAttr(value) {
-return escapeHtml(value);
-}
-
-
-/* -------------------------
+/* =========================================================
 START
-------------------------- */
+========================================================= */
 
-start();
+resetGame();
 
 </script>
 
